@@ -1,0 +1,55 @@
+# Theme
+theme = dark:Catppuccin Mocha, light:Catppuccin Latte
+
+# Font
+font-family = "JetBrainsMono Nerd Font"
+font-size = 19
+
+# Window appearance
+window-decoration = true
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.9
+background-blur-radius = 20
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+
+# Behavior
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+confirm-close-surface = true
+
+# Scrollback
+scrollback-limit = 100000
+
+# Shell
+command = /opt/homebrew/bin/nu
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# macOS specific
+macos-option-as-alt = true
+
+# Working directory inheritance
+window-inherit-working-directory = true
+window-inherit-font-size = true
+
+# Splits - Create
+keybind = ctrl+backslash=new_split:auto
+
+# Splits - Navigate
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+j=goto_split:bottom
+
+# Splits - Resize
+keybind = ctrl+shift+left=resize_split:left,10
+keybind = ctrl+shift+right=resize_split:right,10
+keybind = ctrl+shift+up=resize_split:up,10
+keybind = ctrl+shift+down=resize_split:down,10
+
+# Splits - Close
+keybind = ctrl+shift+w=close_surface

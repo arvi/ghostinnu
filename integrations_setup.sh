@@ -47,8 +47,10 @@ echo "✅ Zoxide - smarter cd that learns your habits"
 
 if command -v mise &> /dev/null; then
     mise activate nu > integrations/mise.nu
-    # Remove CSV lines at the top (lines starting with 'set,' or 'hide,') - causing error in cursor terminal; should work with ghostty and cursor terminal
-    sed -i '' '/^set,/d; /^hide,/d' integrations/mise.nu
+
+    grep -v -e '^set,' -e '^hide,' integrations/mise.nu > integrations/mise.nu.tmp
+    mv integrations/mise.nu.tmp integrations/mise.nu
+
     echo "✅ Mise - polyglot runtime/tool version manager"
 fi
 
@@ -66,8 +68,8 @@ echo ""
 echo "🎉 Setup complete!"
 echo ""
 echo "Next steps:"
-echo "  1. Restart Nushell (or run: source config.nu)"
-echo "  2. Restart Ghostty"
+echo "  1. Restart Nushell (run: nu then run: source config.nu)"
+echo "  2. Restart Ghostty (quit/open Ghostty)"
 echo ""
 if ls ~/.config/ghostty/config.bak ~/.config/starship.toml.bak 2>/dev/null | grep -q .; then
     echo "📦 Backups created:"

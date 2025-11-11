@@ -26,8 +26,7 @@ scrollback-limit = 100000
 
 # Shell
 command = /opt/homebrew/bin/nu
-shell-integration = detect
-shell-integration-features = cursor,sudo,title
+shell-integration = none
 
 # macOS specific
 macos-option-as-alt = true

@@ -65,48 +65,54 @@ brew install neovim
 ## 🔧 Installation - macOS
 > **🍎 Primary Platform**: These instructions are for **macOS** where this config is actively used and tested. While the Nushell configs themselves are cross-platform, the setup script may need adjustments for Linux/Windows. Contributions for other platforms are very welcome!
 
-> **Note**: The following steps should be done in the `Ghostty` terminal. Make sure you've installed all [prerequisites](#-prerequisites) first.
+#### The following steps should be done in a bash/zsh shell using any terminal **other than Ghostty**.
+> **Note**: Ghostty will be configured in Step 3. For now, use Terminal.app, iTerm2, or another terminal emulator.
 
-### 1. Backup existing configuration (if any)
-```nushell
-# Check if config exists - if you see "not found", skip this step (Proceed to Step 2)
-ls `~/Library/Application Support/nushell`
-
-# If it exists, back it up:
-mv ($env.HOME | path join "Library/Application Support/nushell") ($env.HOME | path join "Library/Application Support/nushell.backup")
+### 1. Backup existing configuration _(Proceed to Step 2 if not existing)_
+```bash
+# View config and back it up
+ls ~/Library/Application\ Support/nushell
+mv ~/Library/Application\ Support/nushell ~/Library/Application\ Support/nushell.backup
 
 # You should see both nushell and nushell.backup
-ls `~/Library/Application Support/`
-```
-```bash
-# Close `Ghostty` and use `Terminal` to stop existing nu processes and delete existing nushell
+ls ~/Library/Application Support/
+
+# Stop existing nu processes (if any) and delete nushell
 killall nu
 cd ~/Library/Application\ Support/
-sudo rm -rf nushell/
-
-# You should only see nushell.backup
-ls -la
-
-# Exit `Terminal` and do Step 2 in `Ghostty`
+rm -rf nushell # try sudo rm -rf nushell if permission denied
 ```
 
 ### 2. Clone this repository
 `<repo-url>` e.g `https://github.com/arvi/ghostinnu.git`
-```nushell
-git clone <repo-url> `~/Library/Application Support/nushell`
-cd `~/Library/Application Support/nushell`
+```bash
+git clone <repo-url> ~/Library/Application Support/nushell
+cd ~/Library/Application Support/nushell
 ls -la
 ```
 
 ### 3. Run integrations setup script
-```nushell
-chmod +x integrations_setup.sh
+```bash
+cd ~/Library/Application\ Support/nushell
+
+# Use nushell
+nu
+
+# Make sure script is executable then setup integrations directory and symlinks
+chmod +x integrations_setup.sh #
 ./integrations_setup.sh
 ```
 
-### 4. Restart Ghostty
-
+### 4. Restart Nushell & Ghostty
+```bash
+# Restart nushell
+nu
+cd ~/Library/Application\ Support/nushell
+source config.nu
+```
 Close and reopen Ghostty terminal to apply all configurations.
+
+Explore [usage guide](#-usage-guide) or quickly check core tools `which ghostty nu starship`.
 
 ## 🖥️ Editor Integration
 
@@ -123,7 +129,7 @@ To use Nushell as your default terminal in Cursor and enable Alt keybindings:
     "terminal.integrated.defaultProfile.osx": "nu",
 
     // Enable Alt keybindings
-    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.macOptionIsMeta": true, // or "left"q
 
     // Terminal profiles
     "terminal.integrated.profiles.osx": {
@@ -320,6 +326,7 @@ echo $nu.default-config-dir
 ```nushell
 $env.config
 $env.config.keybindings
+$env.HOME
 ```
 
 ---

@@ -69,17 +69,33 @@ brew install neovim
 
 ### 1. Backup existing configuration (if any)
 ```nushell
-# Check if config exists - if you see "not found", skip this step
+# Check if config exists - if you see "not found", skip this step (Proceed to Step 2)
 ls `~/Library/Application Support/nushell`
 
 # If it exists, back it up:
 mv ($env.HOME | path join "Library/Application Support/nushell") ($env.HOME | path join "Library/Application Support/nushell.backup")
+
+# You should see both nushell and nushell.backup
+ls `~/Library/Application Support/`
+```
+```bash
+# Close `Ghostty` and use `Terminal` to stop existing nu processes and delete existing nushell
+killall nu
+cd ~/Library/Application\ Support/
+sudo rm -rf nushell/
+
+# You should only see nushell.backup
+ls -la
+
+# Exit `Terminal` and do Step 2 in `Ghostty`
 ```
 
 ### 2. Clone this repository
+`<repo-url>` e.g `https://github.com/arvi/ghostinnu.git`
 ```nushell
-git clone <repo-url> ~/Library/Application\ Support/nushell
-cd ~/Library/Application\ Support/nushell
+git clone <repo-url> `~/Library/Application Support/nushell`
+cd `~/Library/Application Support/nushell`
+ls -la
 ```
 
 ### 3. Run integrations setup script

@@ -65,6 +65,8 @@ brew install neovim
 ## 🔧 Installation - macOS
 > **🍎 Primary Platform**: These instructions are for **macOS** where this config is actively used and tested. While the Nushell configs themselves are cross-platform, the setup script may need adjustments for Linux/Windows. Contributions for other platforms are very welcome!
 
+> **Note**: The following steps should be done in the `Ghostty` terminal. Make sure you've installed all [prerequisites](#-prerequisites) first.
+
 ### 1. Backup existing configuration (if any)
 ```bash
 mv ~/Library/Application\ Support/nushell ~/Library/Application\ Support/nushell.backup
@@ -82,11 +84,9 @@ chmod +x integrations_setup.sh
 ./integrations_setup.sh
 ```
 
-### 4. Reload Nushell
-```bash
-# Restart Nushell or run:
-source ~/Library/Application\ Support/nushell/config.nu
-```
+### 4. Restart Ghostty
+
+Close and reopen Ghostty terminal to apply all configurations.
 
 ## 🖥️ Editor Integration
 
@@ -103,7 +103,7 @@ To use Nushell as your default terminal in Cursor and enable Alt keybindings:
     "terminal.integrated.defaultProfile.osx": "nu",
 
     // Enable Alt keybindings
-    "terminal.integrated.macOptionIsMeta": "true",
+    "terminal.integrated.macOptionIsMeta": true,
 
     // Terminal profiles
     "terminal.integrated.profiles.osx": {

@@ -47,8 +47,10 @@ echo "✅ Zoxide - smarter cd that learns your habits"
 
 if command -v mise &> /dev/null; then
     mise activate nu > integrations/mise.nu
-    # Remove CSV lines at the top (lines starting with 'set,' or 'hide,') - causing error in cursor terminal; should work with ghostty and cursor terminal
-    sed -i '' '/^set,/d; /^hide,/d' integrations/mise.nu
+
+    grep -v -e '^set,' -e '^hide,' integrations/mise.nu > integrations/mise.nu.tmp
+    mv integrations/mise.nu.tmp integrations/mise.nu
+
     echo "✅ Mise - polyglot runtime/tool version manager"
 fi
 

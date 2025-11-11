@@ -68,18 +68,22 @@ brew install neovim
 > **Note**: The following steps should be done in the `Ghostty` terminal. Make sure you've installed all [prerequisites](#-prerequisites) first.
 
 ### 1. Backup existing configuration (if any)
-```bash
-mv ~/Library/Application\ Support/nushell ~/Library/Application\ Support/nushell.backup
+```nushell
+# Check if config exists - if you see "not found", skip this step
+ls `~/Library/Application Support/nushell`
+
+# If it exists, back it up:
+mv ($env.HOME | path join "Library/Application Support/nushell") ($env.HOME | path join "Library/Application Support/nushell.backup")
 ```
 
 ### 2. Clone this repository
-```bash
+```nushell
 git clone <repo-url> ~/Library/Application\ Support/nushell
 cd ~/Library/Application\ Support/nushell
 ```
 
 ### 3. Run integrations setup script
-```bash
+```nushell
 chmod +x integrations_setup.sh
 ./integrations_setup.sh
 ```
@@ -164,7 +168,7 @@ If using Neovim inside Nushell, your shell configuration automatically applies. 
 | `cd` | `z` | Zoxide - smart directory jumping |
 
 ### Quick Commands
-```bash
+```nushell
 # Navigation
 ..                    # Up one directory (zoxide)
 ...                   # Up two directories
@@ -220,7 +224,7 @@ source ($nu.default-config-dir | path join "aliases_custom.nu")
 ### Modify Keybindings
 
 Edit `navigation.nu` and adjust the keybindings section. After changes:
-```bash
+```nushell
 source ($nu.default-config-dir | path join "config.nu")
 ```
 
@@ -231,7 +235,7 @@ Edit `config.nu` and modify the `$env.config.color_config` section. Current them
 ## 🔄 Updating Integration Files
 
 To update starship, zoxide, or mise, regenerate their integration files:
-```bash
+```nushell
 starship init nu | save -f ($nu.default-config-dir | path join "integrations/starship.nu")
 zoxide init nushell | save -f ($nu.default-config-dir | path join "integrations/zoxide.nu")
 mise activate nu | save -f ($nu.default-config-dir | path join "integrations/mise.nu")
@@ -284,20 +288,20 @@ macos-option-as-alt = true
 ### Keybinding not working?
 
 Check if another keybinding conflicts:
-```bash
+```nushell
 $env.config.keybindings | where modifier == alt and keycode == char_c
 ```
 > **Note**: If you see multiple entries with the same modifier+keycode, you have a conflict.
 
 ### Where is my config directory?
 
-```bash
+```nushell
 echo $nu.default-config-dir
 ```
 
 ### How to view my current configuration?
 
-```bash
+```nushell
 $env.config
 $env.config.keybindings
 ```

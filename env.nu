@@ -1,6 +1,10 @@
 # Homebrew PATH
 $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/bin")
 
+# mise shims, so VS Code's Run Task can find node. integrations/mise.nu only
+# hooks pre_prompt, and a task shell never draws a prompt.
+$env.PATH = ($env.PATH | prepend $"($env.HOME)/.local/share/mise/shims")
+
 # Starship prompt
 $env.STARSHIP_SHELL = "nu"
 $env.STARSHIP_SESSION_KEY = (random chars -l 16)

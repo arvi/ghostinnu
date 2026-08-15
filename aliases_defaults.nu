@@ -44,11 +44,16 @@ alias rgl = rg --files-with-matches             # just filenames
 alias rga = rg --hidden --no-ignore             # search all files
 
 # Open with default app
-alias o = ^open  # macOS: opens with default application
+def o [path = "."] {
+    match $nu.os-info.name {
+        "macos" => { ^open $path }
+        "linux" => { ^xdg-open $path }
+        _ => { error make {msg: $"no opener for ($nu.os-info.name)"} }
+    }
+}
 
 # Editor shortcuts
 alias v = nvim
 alias vi = nvim
-alias cs = cursor
 alias cu = cursor
-alias code = cursor
+alias codea = code --add # add file or directory to current vscode workspace

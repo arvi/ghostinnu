@@ -1,6 +1,10 @@
 # Homebrew PATH
 $env.PATH = ($env.PATH | split row (char esep) | prepend "/opt/homebrew/bin")
 
+# GUI-launched terminals (Ghostty from Dock/Finder) inherit launchd's minimal PATH
+# which omits /usr/local/bin where the VS Code `code` CLI lives.
+$env.PATH = ($env.PATH | append "/usr/local/bin" | uniq)
+
 # mise shims, so VS Code's Run Task can find node. integrations/mise.nu only
 # hooks pre_prompt, and a task shell never draws a prompt.
 $env.PATH = ($env.PATH | prepend $"($env.HOME)/.local/share/mise/shims")

@@ -217,9 +217,9 @@ rga "pattern"         # Search all (including gitignored)
 # Editors
 v file.txt            # Open in nvim
 vi file.txt           # Open in nvim
-cs file.txt           # Open in Cursor
 cu file.txt           # Open in Cursor
-o file.pdf            # Open with default app
+codea dir             # Add file/directory to current VS Code workspace
+o file.pdf            # Open with default app (macOS/Linux)
 
 # Utilities
 ll                    # List with sorting
